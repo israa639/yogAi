@@ -1,10 +1,24 @@
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 
 import 'package:community_material_icon/community_material_icon.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:yoga_ai/Bloc/login_bloc/login_bloc.dart';
+import 'package:yoga_ai/data/repositories/auth_repository.dart';
 import 'package:yoga_ai/presentation/DBicons.dart';
+import 'package:yoga_ai/presentation/screens/bottom_nav_bar_screen.dart';
+import 'package:yoga_ai/presentation/screens/login_screen.dart';
 import 'package:yoga_ai/presentation/screens/poses_screen.dart';
-void main() {
-  runApp(const MyApp());
+import 'package:yoga_ai/presentation/screens/registeration_screen.dart';
+
+import 'Bloc/bottom_nav_bar/bottom_nav_bar_bloc.dart';
+import 'Bloc/signUp_bloc/signup_bloc.dart';
+import 'data/repositories/poses_repository.dart';
+Future<void> main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+        await Firebase.initializeApp();
+
+runApp(const MyApp());
 }
 
 class MyApp extends StatelessWidget {
@@ -13,16 +27,47 @@ class MyApp extends StatelessWidget {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
+    return MultiRepositoryProvider(providers: [
+      RepositoryProvider(
+        create: (context) => poses_repository()),
+      RepositoryProvider(
+          create: (context) => AuthRepository())
+      ,],
 
-      home:Poses_screen(),  //MyHomePage(),
+        child: MultiBlocProvider(
+        providers: [BlocProvider<BottomNavBarBloc>(create: (context) => BottomNavBarBloc(posesRepository: poses_repository())),
+
+    BlocProvider<SignupBloc>(create: (_) => SignupBloc(authRepository:AuthRepository())),
+          BlocProvider<LoginBloc>(create: (_) => LoginBloc(authRepository:AuthRepository())),
+
+
+    ],
+
+
+    child: MaterialApp(
+
+      home: loginScreen(),  //MyHomePage(),
       routes:{
 
-        'home':(context)=>MyHomeBar(),
+        'home':(context)=>BottomNavBarScreen(),
 
       },
 
-    );
+    ),),);
+
+
+
+
+
+
+
+
+
+
+
+
+
+
   }
 }
 

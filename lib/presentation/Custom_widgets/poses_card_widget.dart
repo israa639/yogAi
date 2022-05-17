@@ -1,17 +1,30 @@
 
+import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:flutter_svg_provider/flutter_svg_provider.dart';
-
 import 'package:yoga_ai/data/models/pose.dart';
+import 'package:image_downloader/image_downloader.dart';
+class Custom_pose_widget extends StatefulWidget {
 
-class Custom_pose_Card extends StatelessWidget {
-  final pose Pose;
-  Custom_pose_Card({required this.Pose}) : super();
+  final Pose pose;
+
+  Custom_pose_widget({required this.pose});
+
+  @override
+  State<Custom_pose_widget> createState() => _Custom_pose_widgetState(pose:pose);
+}
+class _Custom_pose_widgetState extends State<Custom_pose_widget> {
+
+//class Custom_pose_widget extends StatelessWidget {
+  final Pose pose;
+  _Custom_pose_widgetState({required this.pose}) : super();
 
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context)  {
+        String? imgurl;
+     loadImage(pose.pose_img_url);
     return InkWell(
       onTap: () {
        /* Navigator.push(
@@ -22,6 +35,11 @@ class Custom_pose_Card extends StatelessWidget {
       child:
          // Expanded(child:
       Column(children:<Widget> [
+        Text(imgurl??"no"),
+      SvgPicture.network(imgurl??"no"),
+
+
+
         SizedBox(height: 20,),
           Stack(
             children:<Widget> [
@@ -39,6 +57,7 @@ class Custom_pose_Card extends StatelessWidget {
               ),
               Row(
                 children: <Widget>[
+
                   Stack(
                       children:<Widget> [
 
@@ -53,17 +72,16 @@ class Custom_pose_Card extends StatelessWidget {
                               boxShadow:[ BoxShadow(color: Colors.grey,blurRadius: 10.0),]
                           ),
                         ),
-
-                        SvgPicture.asset(
+                      /*SvgPicture.asset(
                           "lib/presentation/Characters/Chest.svg",
                           // color: Colors.white,
                           height: 100,
                           width: 80,
-                        ),
+                        ),*/
                       ]),
                   SizedBox(width: 20,),
                   Text(
-                    Pose.pose_name,
+                    pose.pose_name,
                     style: TextStyle(
                       fontSize: 16,
                       fontWeight: FontWeight.bold,
@@ -80,5 +98,24 @@ class Custom_pose_Card extends StatelessWidget {
     //)
 
     );
+  }
+  Future<void> loadImage(String img_url)async {
+//select image url
+  try{
+    Reference  ref = FirebaseStorage.instance.ref().child(img_url);
+
+    //get image url from firebase storage
+    final String url =await  ref.getDownloadURL();
+
+   setState()
+    {
+      img_url:url;
+    }
+
+   }
+      catch(e){
+    throw Exception(e.toString());
+      }
+
   }
 }
