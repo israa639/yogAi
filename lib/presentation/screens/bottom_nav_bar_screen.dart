@@ -3,10 +3,12 @@ import 'package:firebase_auth/firebase_auth.dart';
 //import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:yoga_ai/Bloc/Home_bloc/home_bloc.dart';
 import 'package:yoga_ai/presentation/screens/poses_screen.dart';
 
 import '../../Bloc/bottom_nav_bar/bottom_nav_bar_bloc.dart';
 import '../DBicons.dart';
+import 'Home_screen.dart';
 
 
 class BottomNavBarScreen extends StatefulWidget {
@@ -42,7 +44,9 @@ class _BottomNavBarScreenState extends State<BottomNavBarScreen> {
               return Center(child: CircularProgressIndicator());
             }
             if (state is HomePageLoaded) {
-              return Container();
+              return BlocProvider.value(
+                value: BlocProvider.of<HomeBloc>(context),
+                child: MyHomeBar());
             }
             if (state is ProfilePageLoaded) {
               return Container();

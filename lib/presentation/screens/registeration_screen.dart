@@ -44,11 +44,8 @@ class _signUpScreenState extends State<signUpScreen> {
         listener: (context, state) {
           if (state is SignUpSuccessfully) {
             Navigator.of(context).push(
-                MaterialPageRoute(builder: (_) =>BottomNavBarScreen()
-                   /* BlocProvider.value(
-                      value: BlocProvider.of<BottomNavBarBloc>(context),
-                      child: ,
-                    )*/));
+                MaterialPageRoute(builder: (_) =>BottomNavBarScreen()));
+
           }
           if (state is SignUpError) {
             ScaffoldMessenger.of(context)

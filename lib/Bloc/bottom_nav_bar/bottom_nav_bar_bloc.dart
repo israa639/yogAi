@@ -23,6 +23,7 @@ final  poses_repository posesRepository;
 try{
 
   await this.posesRepository.getPoses();
+ // this.posesRepository.addPoses();
   //List<Pose>? poses=this.posesRepository.poses;
 
 }
@@ -39,17 +40,20 @@ try{
     });
     on<PageTapped>((event, emit) async {
       this.current_index=event.index;
-      emit(PageLoading());
+
       if(this.current_index%3==0)
-      {try {
+      {      emit(PageLoading());
+
+      try {
         emit(HomePageLoaded());
       }
       catch(e){
         emit(PageLoadedError(e.toString()));
       }}
       if(this.current_index%3==1)
-      {
-        try {
+      {      emit(PageLoading());
+
+      try {
           emit(PosesPageLoaded(this.posesRepository.poses));
       }
       catch(e){
@@ -57,7 +61,9 @@ try{
       }}
 
       if(this.current_index%3==2)
-      {try {
+      {      emit(PageLoading());
+
+      try {
         emit(ProfilePageLoaded());
       }
       catch(e){

@@ -9,13 +9,13 @@ class user{
   String? user_id;
 
 
-  user({required this.user_name,this.level,required this.age, this.user_id});
+  user({required this.user_name,required this.level,required this.age, this.user_id});
 
  Map<String, dynamic> toDocument() {
   return {
    "age":this.age,
    "user_name":this.user_name,
-   "level":Level.beginner.toString(),
+   "level":level,
    "user_id":this.user_id,
   };
  }

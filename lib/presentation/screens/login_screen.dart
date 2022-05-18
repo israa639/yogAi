@@ -38,8 +38,9 @@ class _loginScreenState extends State<loginScreen> {
       body: BlocListener<LoginBloc, LoginState>(
         listener: (context, state) {
           if (state is loginSuccessfully) {
-            Navigator.of(context).push(
-                MaterialPageRoute(builder: (_) =>BottomNavBarScreen()));
+
+                Navigator.of(context).push(
+                    MaterialPageRoute(builder: (_) =>BottomNavBarScreen()));
            /*
             Navigator.of(context).push(
                 MaterialPageRoute(builder: (_) =>BlocProvider.value(

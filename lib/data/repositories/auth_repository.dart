@@ -29,7 +29,7 @@ class AuthRepository{
      { try {
         final result = await _firebaseAuth
             .createUserWithEmailAndPassword(email: email, password: password);
-        user? new_user = user(user_name:username,age:age,user_id:result.user?.uid);
+        user? new_user = user(user_name:username,level:Level.beginner.string,age:age,user_id:result.user?.uid);
         createUser(new_user);
         this.current_user=new_user;
 
