@@ -3,6 +3,7 @@ import 'dart:async';
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:yoga_ai/Bloc/login_bloc/login_bloc.dart';
 
 import '../../data/models/pose.dart';
 import '../../data/repositories/poses_repository.dart';
@@ -49,7 +50,7 @@ try{
       if(this.current_index%3==1)
       {
         try {
-        emit(PosesPageLoaded(this.posesRepository.poses));
+          emit(PosesPageLoaded(this.posesRepository.poses));
       }
       catch(e){
         emit(PageLoadedError(e.toString()));

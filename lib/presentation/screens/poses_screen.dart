@@ -32,7 +32,7 @@ _Poses_screenState(this._poses);
     return Scaffold(
 
       body: ListView.builder(
-        itemCount: (this._poses.length)-1,
+        itemCount: (this._poses.length),
         itemBuilder: (contex, index) =>
             Custom_pose_widget(pose:this._poses[index]),
       )

@@ -8,6 +8,13 @@ class poses_repository{
   final _fireStorage=FirebaseStorage.instance;
     late final List<Pose> poses;
      //method to get poses data from firestore
+  void setPosesUrl()
+  {
+    for(int i=0;i<poses.length;i++)
+    {
+      this.poses[i].pose_Storage_url= loadImage(poses[i].pose_img_url);
+    }
+  }
   Future<void> getPoses()async
   {
     final documentSnapshot =
@@ -18,10 +25,7 @@ class poses_repository{
 
       this.poses=await documentSnapshot.docs.map((doc)=>Pose.fromSnapshot(doc)).toList();
 
-      for(int i=0;i<poses.length;i++)
-        {
-          loadImage(poses[i].pose_img_url);
-        }
+      setPosesUrl();
 
      // return poses;
     }
@@ -59,18 +63,20 @@ catch(e)
   }
 }
 */
-  Future<void> loadImage(String img_url) async{
-//select image url
-    Reference  ref = FirebaseStorage.instance.ref().child(img_url);
+  static Future<String> loadImage(String img_url1)async {
 
-    //get image url from firebase storage
-    img_url = await ref.getDownloadURL();
+    try{
+      final String url= await FirebaseStorage.instance.ref().child(img_url1).getDownloadURL();
 
-    //return url;
+
+      return url;
+
+    }
+    catch(e){
+      throw Exception(e.toString());
+    }
 
   }
-
-
 
 
 

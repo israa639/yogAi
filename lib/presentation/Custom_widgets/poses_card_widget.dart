@@ -16,15 +16,13 @@ class Custom_pose_widget extends StatefulWidget {
 }
 class _Custom_pose_widgetState extends State<Custom_pose_widget> {
 
-//class Custom_pose_widget extends StatelessWidget {
   final Pose pose;
   _Custom_pose_widgetState({required this.pose}) : super();
 
 
   @override
   Widget build(BuildContext context)  {
-        String? imgurl;
-     loadImage(pose.pose_img_url);
+
     return InkWell(
       onTap: () {
        /* Navigator.push(
@@ -35,10 +33,6 @@ class _Custom_pose_widgetState extends State<Custom_pose_widget> {
       child:
          // Expanded(child:
       Column(children:<Widget> [
-        Text(imgurl??"no"),
-      SvgPicture.network(imgurl??"no"),
-
-
 
         SizedBox(height: 20,),
           Stack(
@@ -72,18 +66,26 @@ class _Custom_pose_widgetState extends State<Custom_pose_widget> {
                               boxShadow:[ BoxShadow(color: Colors.grey,blurRadius: 10.0),]
                           ),
                         ),
-                      /*SvgPicture.asset(
-                          "lib/presentation/Characters/Chest.svg",
-                          // color: Colors.white,
-                          height: 100,
-                          width: 80,
-                        ),*/
+                        FutureBuilder(future:pose.pose_Storage_url,
+                            builder: (context,snapshot){
+                              if(snapshot.connectionState==ConnectionState.done)
+                              { if (snapshot.hasData) {
+                                return Container(
+                                  width: 130,
+                                  height: 100,
+                                  child: SvgPicture.network(snapshot.data.toString()),
+                                );}
+
+                              }return Container();
+
+                            }),
+
                       ]),
                   SizedBox(width: 20,),
                   Text(
                     pose.pose_name,
                     style: TextStyle(
-                      fontSize: 16,
+                      fontSize: 20,
                       fontWeight: FontWeight.bold,
                     ),
                   ),
@@ -99,23 +101,5 @@ class _Custom_pose_widgetState extends State<Custom_pose_widget> {
 
     );
   }
-  Future<void> loadImage(String img_url)async {
-//select image url
-  try{
-    Reference  ref = FirebaseStorage.instance.ref().child(img_url);
 
-    //get image url from firebase storage
-    final String url =await  ref.getDownloadURL();
-
-   setState()
-    {
-      img_url:url;
-    }
-
-   }
-      catch(e){
-    throw Exception(e.toString());
-      }
-
-  }
 }
