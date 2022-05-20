@@ -31,19 +31,13 @@ class _MyHomeBarState extends State<MyHomeBar> {
     );
 
   }
-  Container makeContainer(AlignmentGeometry a,String text,double fontSize,Color c){
+  Widget makeTextContainer(AlignmentGeometry a,String text,double fontSize,Color c){
     return Container(
       alignment:a,
       child: Text(text,
         style: TextStyle(fontSize: fontSize,color: c),
       ),);}
-  BottomNavigationBarItem makeNavigationButton(String Btnlabel,IconData icon1)
-  {
-    return  BottomNavigationBarItem(
-      icon:Icon( icon1),
-      label: Btnlabel,
-    );
-  }
+
 
   @override
   Widget build(BuildContext context) {
@@ -58,16 +52,16 @@ class _MyHomeBarState extends State<MyHomeBar> {
         Container(
           alignment: Alignment.center,
           height: 40,
-          child: Icon(DBIcons.logo),
+          child: Icon(DBIcons.logo,size: 50,color: Colors.red.shade300,),
 
         ),
-        makeContainer(Alignment.center,'YogAi',20,Colors.blue),
+        makeTextContainer(Alignment.center,'YogAi',20,Colors.blue),
 
         Row(children:<Widget>[
-          makeContainer(Alignment.centerLeft,' Hi,',40,Colors.black),
-          makeContainer(Alignment.centerLeft,_HomeBloc.current_user.user_name,40, Colors.redAccent.shade200),
+          makeTextContainer(Alignment.centerLeft,' Hi,',40,Colors.black),
+          makeTextContainer(Alignment.centerLeft,_HomeBloc.current_user.user_name,40, Colors.redAccent.shade200),
         ]),
-        makeContainer(Alignment.centerLeft,_HomeBloc.current_user.level.toString(),20, Colors.black),
+        makeTextContainer(Alignment.centerLeft,_HomeBloc.current_user.level.toString(),20, Colors.black),
         SizedBox(height: 50,),
         Container(
             height: 200,
@@ -81,6 +75,9 @@ class _MyHomeBarState extends State<MyHomeBar> {
                 makeProgramContainer(),
               ],)
         ),
+        SizedBox(height: 50,),
+        makeTextContainer(Alignment.topLeft,"Recommended Flows",30, Colors.black),
+        SizedBox(height: 50,),
       ],),
 
 

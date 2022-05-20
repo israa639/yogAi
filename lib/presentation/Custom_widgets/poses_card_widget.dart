@@ -1,10 +1,8 @@
-
-import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:flutter_svg_provider/flutter_svg_provider.dart';
 import 'package:yoga_ai/data/models/pose.dart';
-import 'package:image_downloader/image_downloader.dart';
+
 class Custom_pose_widget extends StatefulWidget {
 
   final Pose pose;
@@ -40,7 +38,7 @@ class _Custom_pose_widgetState extends State<Custom_pose_widget> {
 
               Container(
                 height: 100,
-                width:350,
+                width:380,
                 decoration: BoxDecoration(
 
                     borderRadius:BorderRadius.all(Radius.circular(20.0)),

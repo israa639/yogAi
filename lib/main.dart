@@ -8,6 +8,7 @@ import 'package:yoga_ai/data/repositories/auth_repository.dart';
 import 'package:yoga_ai/presentation/DBicons.dart';
 import 'package:yoga_ai/presentation/screens/bottom_nav_bar_screen.dart';
 import 'package:yoga_ai/presentation/screens/login_screen.dart';
+import 'package:yoga_ai/presentation/screens/my_programs.dart';
 import 'package:yoga_ai/presentation/screens/poses_screen.dart';
 import 'package:yoga_ai/presentation/screens/registeration_screen.dart';
 
@@ -49,7 +50,7 @@ class MyApp extends StatelessWidget {
 
     child: MaterialApp(
 
-      home: signUpScreen(),  //MyHomePage(),
+      home:myPrograms_screen(),// signUpScreen(),  //MyHomePage(),
       routes:{
 
         'home':(context)=>BottomNavBarScreen(),

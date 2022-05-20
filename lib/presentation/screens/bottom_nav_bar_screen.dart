@@ -64,7 +64,8 @@ class _BottomNavBarScreenState extends State<BottomNavBarScreen> {
             return BottomNavigationBar(
               currentIndex: bottomNavigationBloc.current_index,
               backgroundColor: Colors.redAccent,
-                selectedItemColor: Colors.white,
+                selectedItemColor: Colors.grey,
+              unselectedItemColor: Colors.white,
               items: <BottomNavigationBarItem>[
                 makeNavigationButton('home', Icons.home),
                 makeNavigationButton('search', DBIcons.logo),
