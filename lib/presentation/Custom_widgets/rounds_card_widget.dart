@@ -46,7 +46,7 @@ class Custom_round_widget extends StatelessWidget {
       children: <Widget>[
 
 
-    FutureBuilder(future:round.round_specs.round_img_url,
+    FutureBuilder(future:round.round_specs.round_storage_url,
     builder: (context,snapshot){
     if(snapshot.connectionState==ConnectionState.done)
     { if (snapshot.hasData) {

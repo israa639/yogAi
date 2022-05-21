@@ -4,6 +4,7 @@ import 'package:flutter_svg/svg.dart';
 
 import '../../Bloc/Home_bloc/home_bloc.dart';
 import '../../Bloc/bottom_nav_bar/bottom_nav_bar_bloc.dart';
+import '../Custom_widgets/rounds_card_widget.dart';
 import '../DBicons.dart';
 
 class MyHomeBar extends StatefulWidget {
@@ -42,105 +43,127 @@ class _MyHomeBarState extends State<MyHomeBar> {
   @override
   Widget build(BuildContext context) {
     final _HomeBloc = BlocProvider.of<HomeBloc>(context);
+    _HomeBloc.add( FirstInitiate());
 
     return Scaffold(
+        body: BlocBuilder<HomeBloc, HomeState>(
+        bloc: _HomeBloc,
+        builder: (BuildContext context, HomeState state)
+    {
+      if (state is LoadingPage) {
+        return Center(child: CircularProgressIndicator());
+      }
+      /*if(state is HomeInitial)
+        return Center(child:Text("initiate"));*/
+      if (state is HomeInitial){
 
-      body:
-//Icon(DBIcons.logo),
-ListView(scrollDirection: Axis.vertical,
-           children:[
+        return ListView(scrollDirection: Axis.vertical,
+          children: [
 
-        SizedBox(height: 50,),
-        Container(
-          alignment: Alignment.center,
-          height: 40,
-          child: Icon(DBIcons.logo,size: 50,color: Colors.red.shade300,),
+            SizedBox(height: 50,),
+            Container(
+              alignment: Alignment.center,
+              height: 40,
+              child: Icon(DBIcons.logo, size: 50, color: Colors.red.shade300,),
 
-        ),
-        makeTextContainer(Alignment.center,'YogAi',20,Colors.blue),
+            ),
+            makeTextContainer(Alignment.center, 'YogAi', 20, Colors.blue),
 
-        Row(children:<Widget>[
-          makeTextContainer(Alignment.centerLeft,' Hi,',40,Colors.black),
-          makeTextContainer(Alignment.centerLeft,_HomeBloc.current_user.user_name,40, Colors.redAccent.shade200),
-        ]),
-        makeTextContainer(Alignment.centerLeft,_HomeBloc.current_user.level.toString(),20, Colors.black),
-        SizedBox(height: 50,),
-         InkWell(
-        onLongPress: (){
-    },
-    onTap: () {
+            Row(children: <Widget>[
+              makeTextContainer(Alignment.centerLeft, ' Hi,', 40, Colors.black),
+              makeTextContainer(
+                  Alignment.centerLeft, _HomeBloc.current_user.user_name, 40,
+                  Colors.redAccent.shade200),
+            ]),
+            makeTextContainer(
+                Alignment.centerLeft, _HomeBloc.current_user.level.toString(),
+                20, Colors.black),
+            SizedBox(height: 50,),
+            InkWell(
+              onLongPress: () {},
+              onTap: () {
 
-    /* Navigator.push(
+                /* Navigator.push(
             context,
             MaterialPageRoute(
                 ));*/
-    },
-    child:
-      Container(
-        height: 200,
+              },
+              child:
+              Container(
+                  height: 200,
 
-        child:Stack(
-            children:<Widget>[Container(
-              height: 200,
-              width: 400,
-              decoration: BoxDecoration(
+                  child: Stack(
+                      children: <Widget>[Container(
+                        height: 200,
+                        width: 400,
+                        decoration: BoxDecoration(
 
-                  borderRadius:BorderRadius.all(Radius.circular(20.0)),
+                            borderRadius: BorderRadius.all(
+                                Radius.circular(20.0)),
 
-                  color: Colors.blue.shade50,
-                  boxShadow:[ BoxShadow(color: Colors.grey,blurRadius: 10.0),]
-              ),
-            ), SvgPicture.asset(
-          "Assets/my_programs.svg",
-          // color: Colors.redAccent,
-          height: 200,
-          width: 100,
-        ),
-Column(
-  children: [
-    SizedBox(
-      height:25,),
-   Row(children:[  SizedBox(
-     width:20,),Container(
+                            color: Colors.blue.shade50,
+                            boxShadow: [
+                              BoxShadow(color: Colors.grey, blurRadius: 10.0),
+                            ]
+                        ),
+                      ), SvgPicture.asset(
+                        "Assets/my_programs.svg",
+                        // color: Colors.redAccent,
+                        height: 200,
+                        width: 100,
+                      ),
+                        Column(
+                          children: [
+                            SizedBox(
+                              height: 25,),
+                            Row(children: [ SizedBox(
+                              width: 20,), Container(
 //color:
-    height:50,
-    width: 150,
-    child:
-    Text("my program", style: TextStyle(fontSize: 20,color: Colors.black,), ),),],)
+                              height: 50,
+                              width: 150,
+                              child:
+                              Text("my program", style: TextStyle(
+                                fontSize: 20, color: Colors.black,),),),
+                            ],)
 
 
+                          ],
+                        )
 
-  ],
-)
+
+                      ]
+                  )),),
+
+            makeTextContainer(
+                Alignment.topLeft, "Focused area", 30, Colors.black),
+            SizedBox(height: 10,),
+            makeTextContainer(
+                Alignment.topLeft, "${_HomeBloc.Focused_area_rounds!.length}", 30, Colors.black),
+            // SizedBox(height: 50,),
+            /*Container(
+                height: 200,
+                child:
+                ListView.builder(
+
+                    itemCount: (_HomeBloc.Focused_area_rounds!.length),
+
+                    itemBuilder: (contex, index) =>
+                        Custom_round_widget(
+                            _HomeBloc.Focused_area_rounds![index])
+                )
+            ),*/
+            SizedBox(height: 50,),
+            makeTextContainer(
+                Alignment.topLeft, "Recommended Flows", 30, Colors.black),
+            SizedBox(height: 50,),
+          ]);
+    }
+
+    // ],),
+    // This trailing comma makes auto-formatting nicer for build methods.
 
 
-        ]
-)),),
-
-             makeTextContainer(Alignment.topLeft,"Focused area",30, Colors.black),
-             SizedBox(height: 10,),
-       // SizedBox(height: 50,),
-        Container(
-            height: 200,
-            child:
-            ListView(scrollDirection: Axis.horizontal,//Custom_round_widget
-              children:[
-                makeProgramContainer(),
-                SizedBox(width: 20,),
-                makeProgramContainer(),
-                SizedBox(width: 20,),
-                makeProgramContainer(),
-              ],)
+  return Container();}
         ),
-        SizedBox(height: 50,),
-        makeTextContainer(Alignment.topLeft,"Recommended Flows",30, Colors.black),
-        SizedBox(height: 50,),
-      ],),
-
-
-
-
-            // ],),
-      // This trailing comma makes auto-formatting nicer for build methods.
-    );
+  );
   }}
