@@ -7,10 +7,12 @@ class Round_specs{
   final bool is_customized_round;
   final bool is_focused_area;
   final round_time;
-  Future<String>?   round_img_url;
+  String  round_img_url;
+  Future<String>?   round_storage_url;
+
 
   Round_specs(
-      {required this.round_name, required this.round_poses_id, required this.round_time, required this.is_customized_round,required this.is_focused_area,this.round_img_url});
+      {required this.round_name, required this.round_poses_id, required this.round_time, required this.is_customized_round,required this.is_focused_area,required this.round_img_url});
 
 
   Map<String, dynamic> toDocument() {
@@ -21,6 +23,7 @@ class Round_specs{
       "poses_id": round_poses_id,
       "round_time": round_time,
       "poses_id":[],
+      "round_img_url":round_img_url
     };
   }
 
