@@ -8,7 +8,7 @@ class poses_repository{
   final _fireStorage=FirebaseStorage.instance;
     late final List<Pose> poses;
      //method to get poses data from firestore
-  void setPosesUrl()
+  void setPosesUrl()//set the downloadUrl for each pose
   {
     for(int i=0;i<poses.length;i++)
     {
@@ -38,7 +38,7 @@ class poses_repository{
   {
   try {
 
-    await  _firestore.collection('poses') .doc(pose.pose_img_url).set(pose.toDocument());
+    await  _firestore.collection('poses') .add(pose.toDocument());
 
   }
   catch(e)
@@ -46,32 +46,8 @@ class poses_repository{
     throw Exception('failed upload poses');
     }
   }
-Future<void> addPoses()async
-{ List<Pose>poses = [
-  new Pose(pose_name: "chair",
-      pose_img_url: "chair_blue.svg",pose_time: 10),
-  new Pose(pose_name: "cobra",
-      pose_img_url: "cobra_blue.svg",pose_time: 10),
-  new Pose(pose_name: "downward facing dog",
-      pose_img_url: "downward_facing_dog_blue.svg",pose_time: 10),
-  new Pose(pose_name: "plank",
-      pose_img_url: "plank_pose_blue.svg",pose_time: 10),
-  new Pose(pose_name: "tree",
-      pose_img_url: "tree_pose.svg",pose_time: 10),
-  new Pose(pose_name: "triangle",
-      pose_img_url: "triangle_pose_blue.svg",pose_time: 10),
-  new Pose(pose_name: "chair",
-      pose_img_url: "chair_blue.svg",pose_time: 10),
-  new Pose(pose_name: "upward plank",
-      pose_img_url: "upward_plank_blue.svg",pose_time: 10),
-  new Pose(pose_name: "warrior 1",
-      pose_img_url: "warrior1_blue.svg",pose_time: 10),
-  new Pose(pose_name: "warrior 2",
-      pose_img_url: "warrior2_blue.svg",pose_time: 10),
-  new Pose(pose_name: "bridge",
-      pose_img_url: "bridge_blue.svg",pose_time: 10),
-
-];
+Future<void> addPoses(List<Pose> poses )async
+{
   try {
 for(int i=0;i<poses.length;i++)
   {
@@ -88,11 +64,8 @@ catch(e)
   static Future<String> loadImage(String img_url1)async {
 
     try{
-      final String url= await FirebaseStorage.instance.ref().child(img_url1).getDownloadURL();
-
-
+      final String url= await FirebaseStorage.instance.ref("/poses_imgs").child(img_url1).getDownloadURL();
       return url;
-
     }
     catch(e){
       throw Exception(e.toString());

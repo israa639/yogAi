@@ -53,7 +53,7 @@ class _BottomNavBarScreenState extends State<BottomNavBarScreen> {
             }
             if (state is PosesPageLoaded) {
 
-             return Poses_screen(state.Poses);
+             return Poses_screen(state.Poses,false);
             }
             return Container();
           }

@@ -6,23 +6,30 @@ import 'package:yoga_ai/data/models/pose.dart';
 class Custom_pose_widget extends StatefulWidget {
 
   final Pose pose;
+  bool checkBox_appear;
+  List<String> selectedIndex;
 
-  Custom_pose_widget({required this.pose});
+  Custom_pose_widget({required this.pose,required this.selectedIndex,required this.checkBox_appear});
 
   @override
-  State<Custom_pose_widget> createState() => _Custom_pose_widgetState(pose:pose);
+  State<Custom_pose_widget> createState() => _Custom_pose_widgetState(pose:pose,selectedIndex: selectedIndex,checkBox_appear:checkBox_appear );
 }
 class _Custom_pose_widgetState extends State<Custom_pose_widget> {
-
+bool? value=false;
+bool checkBox_appear;
   final Pose pose;
-  _Custom_pose_widgetState({required this.pose}) : super();
+  List<String> selectedIndex;
+  _Custom_pose_widgetState({required this.pose,required this.selectedIndex,required this.checkBox_appear}) : super();
 
 
   @override
   Widget build(BuildContext context)  {
 
     return InkWell(
+        onLongPress: (){
+        },
       onTap: () {
+
        /* Navigator.push(
             context,
             MaterialPageRoute(
@@ -80,17 +87,22 @@ class _Custom_pose_widgetState extends State<Custom_pose_widget> {
 
                       ]),
                   SizedBox(width: 20,),
-                  Text(
+                  Container(child: Text(
                     pose.pose_name,
                     style: TextStyle(
                       fontSize: 20,
                       fontWeight: FontWeight.bold,
                     ),
-                  ),
+
+                  ),),
+                  SizedBox(width: 40,),
+
+
 
                 ],
-              ),
 
+              ),
+              checkbox(checkBox_appear),
 
             ],
           ),
@@ -99,5 +111,22 @@ class _Custom_pose_widgetState extends State<Custom_pose_widget> {
 
     );
   }
+Widget checkbox(bool value_check)
+{
+  if(value_check==true)
+    {
+     return Checkbox(value: this.value, onChanged:(newvalue){
+        setState((){  this.value= newvalue;});
+        if(newvalue==true&&!selectedIndex.contains(pose.pose_name))
+        { this.selectedIndex.add(pose.pose_name);
+        }
+        else if(newvalue==false&&selectedIndex.contains(pose.pose_name))
+        {
+          selectedIndex.remove(pose.pose_name);
+        }
 
+      });
+    }
+return Container();
+}
 }

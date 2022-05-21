@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_svg/svg.dart';
 
 import '../../Bloc/Home_bloc/home_bloc.dart';
 import '../../Bloc/bottom_nav_bar/bottom_nav_bar_bloc.dart';
@@ -14,11 +15,10 @@ class MyHomeBar extends StatefulWidget {
 }
 
 class _MyHomeBarState extends State<MyHomeBar> {
-  int currentIndx=0;
 
-  String userName='israa!';
   Container makeProgramContainer(){
-    return Container(
+    return
+      Container(
       height: 200,
       width:300,
       decoration: BoxDecoration(
@@ -47,7 +47,9 @@ class _MyHomeBarState extends State<MyHomeBar> {
 
       body:
 //Icon(DBIcons.logo),
-      Column(children:<Widget>[
+ListView(scrollDirection: Axis.vertical,
+           children:[
+
         SizedBox(height: 50,),
         Container(
           alignment: Alignment.center,
@@ -63,10 +65,65 @@ class _MyHomeBarState extends State<MyHomeBar> {
         ]),
         makeTextContainer(Alignment.centerLeft,_HomeBloc.current_user.level.toString(),20, Colors.black),
         SizedBox(height: 50,),
+         InkWell(
+        onLongPress: (){
+    },
+    onTap: () {
+
+    /* Navigator.push(
+            context,
+            MaterialPageRoute(
+                ));*/
+    },
+    child:
+      Container(
+        height: 200,
+
+        child:Stack(
+            children:<Widget>[Container(
+              height: 200,
+              width: 400,
+              decoration: BoxDecoration(
+
+                  borderRadius:BorderRadius.all(Radius.circular(20.0)),
+
+                  color: Colors.blue.shade50,
+                  boxShadow:[ BoxShadow(color: Colors.grey,blurRadius: 10.0),]
+              ),
+            ), SvgPicture.asset(
+          "Assets/my_programs.svg",
+          // color: Colors.redAccent,
+          height: 200,
+          width: 100,
+        ),
+Column(
+  children: [
+    SizedBox(
+      height:25,),
+   Row(children:[  SizedBox(
+     width:20,),Container(
+//color:
+    height:50,
+    width: 150,
+    child:
+    Text("my program", style: TextStyle(fontSize: 20,color: Colors.black,), ),),],)
+
+
+
+  ],
+)
+
+
+        ]
+)),),
+
+             makeTextContainer(Alignment.topLeft,"Focused area",30, Colors.black),
+             SizedBox(height: 10,),
+       // SizedBox(height: 50,),
         Container(
             height: 200,
             child:
-            ListView(scrollDirection: Axis.horizontal,
+            ListView(scrollDirection: Axis.horizontal,//Custom_round_widget
               children:[
                 makeProgramContainer(),
                 SizedBox(width: 20,),
@@ -83,7 +140,7 @@ class _MyHomeBarState extends State<MyHomeBar> {
 
 
 
-
+            // ],),
       // This trailing comma makes auto-formatting nicer for build methods.
     );
   }}

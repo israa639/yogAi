@@ -6,8 +6,9 @@ class Pose {
  final  String pose_name;
  String pose_img_url;
  late final pose_time;
+ final String pose_id;
     Future<String>? pose_Storage_url;
-  Pose({required this.pose_name,required this.pose_img_url,this.pose_time});
+  Pose({required this.pose_name,required this.pose_img_url,this.pose_time,required this.pose_id});
 //in case of future adding of more poses
   Map<String, dynamic> toDocument() {
 
@@ -28,6 +29,7 @@ class Pose {
 pose_img_url: snap[ "pose_img_url"],
     pose_name: snap["pose_name"],
        pose_time:snap["pose_time"],
+     pose_id: snap.id,
    );
   }
 

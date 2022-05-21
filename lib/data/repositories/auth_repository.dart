@@ -87,6 +87,9 @@ class AuthRepository{
       } else if (e.code == 'wrong-password') {
         throw Exception('Wrong password provided for that user.');
       }
+      else{
+        throw Exception(e.toString());
+      }
     }
   }
   Future<void> signOut() async {

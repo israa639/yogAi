@@ -5,113 +5,86 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:yoga_ai/data/models/pose.dart';
 import 'package:yoga_ai/presentation/Custom_widgets/poses_card_widget.dart';
+import 'package:yoga_ai/presentation/screens/poses_screen.dart';
 
 import '../../Bloc/bottom_nav_bar/bottom_nav_bar_bloc.dart';
 import '../DBicons.dart';
 
-class myPrograms_screen extends StatefulWidget {
+class myPrograms_screen extends StatelessWidget {
+List<Pose>poses;
 
-
-
-  myPrograms_screen();
-
-  @override
-  State<myPrograms_screen> createState() => _myPrograms_screenState();
-}
-class _myPrograms_screenState extends State<myPrograms_screen> {
-
-
-
-
-  _myPrograms_screenState();
+myPrograms_screen({required this.poses});
 
   @override
   Widget build(BuildContext context) {
-    // final _Bottom_nav_bar_Bloc=BlocProvider.of<BottomNavBarBloc>(context);
 
     return Scaffold(
 
-        body: Column(
-        children:<Widget>[
+      body: Column(
+        children: <Widget>[
           SizedBox(height: 50,),
-         Container(
-           alignment: Alignment.topLeft,
-          child:Text(
-            " MY Programs",
-            style: TextStyle(
-              fontSize: 30,
-              fontWeight: FontWeight.bold,
-            ),
-
-          ),),
-          SizedBox(height: 30,),
-        Container(
-         child:Stack(
-            children:<Widget> [
-
-              Container(
-                height: 200,
-                width:395,
-                decoration: BoxDecoration(
-
-                    borderRadius:BorderRadius.all(Radius.circular(20.0)),
-
-                    color: Colors.blue.shade50,
-                    boxShadow:[ BoxShadow(color: Colors.grey,blurRadius: 10.0),]
-                ),
+          Container(
+            alignment: Alignment.topLeft,
+            child: Text(
+              " MY Programs",
+              style: TextStyle(
+                fontSize: 30,
+                fontWeight: FontWeight.bold,
               ),
-              Row(
-                children: <Widget>[
-              ElevatedButton(
-                child: const Icon(Icons.add),
-                onPressed: () {},
-                style: ElevatedButton.styleFrom(
-                  primary:Colors.black, // set the background color
 
+            ),),
+          SizedBox(height: 30,),
+          Container(
+            child: Stack(
+              children: <Widget>[
 
-                ),
-                  // animationDuration:Duration(milliseconds: 1000),
+                Container(
+                  height: 200,
+                  width: 395,
+                  decoration: BoxDecoration(
 
-                ),
+                      borderRadius: BorderRadius.all(Radius.circular(20.0)),
 
-
-                  SvgPicture.asset(
-                    "Assets/44.svg",
-                   // color: Colors.redAccent,
-                    height: 100,
-                    width: 100,
+                      color: Colors.blue.shade50,
+                      boxShadow: [
+                        BoxShadow(color: Colors.grey, blurRadius: 10.0),
+                      ]
                   ),
+                ),
 
 
-            SvgPicture.asset(
-              "Assets/6.svg",
-             // color: Colors.white,
-              height: 200,
-              width: 80,
+                SvgPicture.asset(
+                  "Assets/yoga_poses.svg",
+                  // color: Colors.redAccent,
+                  height: 200,
+                  width: 100,
+                ),
+
+
+              ],
             ),
 
-                      ]),
 
-
-
-
-
-
-
-            ],
           ),
 
-
-        ),
-
-      /*  ListView.builder(
+          /*  ListView.builder(
           itemCount: (this._poses.length),
           itemBuilder: (contex, index) =>
               Custom_pose_widget(pose:this._poses[index]),
         )*/
         ]
-    ,)
-    );
+        ,),
+      floatingActionButton: FloatingActionButton(
+        backgroundColor: Colors.redAccent,
+
+        onPressed: () {
+          Navigator.of(context).push(
+              MaterialPageRoute(
+                  builder: (_) => Poses_screen(this.poses, false)));
+        },
+        tooltip: 'Increment',
+        child: const Icon(Icons.add,),
+      ),);
   }
 
 }

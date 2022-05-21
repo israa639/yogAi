@@ -16,6 +16,7 @@ import 'Bloc/Home_bloc/home_bloc.dart';
 import 'Bloc/bottom_nav_bar/bottom_nav_bar_bloc.dart';
 import 'Bloc/signUp_bloc/signup_bloc.dart';
 import 'data/repositories/poses_repository.dart';
+import 'data/repositories/rounds_repository.dart';
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
         await Firebase.initializeApp();
@@ -33,7 +34,9 @@ class MyApp extends StatelessWidget {
       RepositoryProvider(
         create: (context) => poses_repository()),
       RepositoryProvider(
-          create: (context) => AuthRepository())
+          create: (context) => AuthRepository()),
+    RepositoryProvider(
+    create: (context) => roundsRepository())
       ,],
 
         child: MultiBlocProvider(
@@ -42,7 +45,7 @@ class MyApp extends StatelessWidget {
           BlocProvider<LoginBloc>(create: (context) => LoginBloc(authRepository: RepositoryProvider.of<AuthRepository>(context))),
           BlocProvider<BottomNavBarBloc>(create: (context) => BottomNavBarBloc(posesRepository: poses_repository())),
 
-          BlocProvider<HomeBloc>(create: (context) => HomeBloc(current_user: RepositoryProvider.of<AuthRepository>(context).current_user)),
+          BlocProvider<HomeBloc>(create: (context) => HomeBloc(current_user: RepositoryProvider.of<AuthRepository>(context).current_user,round_repository:  RepositoryProvider.of<roundsRepository>(context))),
 
 
     ],
@@ -50,7 +53,7 @@ class MyApp extends StatelessWidget {
 
     child: MaterialApp(
 
-      home:myPrograms_screen(),// signUpScreen(),  //MyHomePage(),
+      home: signUpScreen(),   //myPrograms_screen(),  MyHomePage()
       routes:{
 
         'home':(context)=>BottomNavBarScreen(),

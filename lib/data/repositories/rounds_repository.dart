@@ -9,44 +9,28 @@ class roundsRepository{
 
   final _firestore=FirebaseFirestore.instance;
   final _fireStorage=FirebaseStorage.instance;
-  late final List<Round>program_rounds;
+   List<Round>?program_rounds;
+  List<Round>?program_focused_area_rounds;
+  List<Round>?program_recommended_flow_rounds;
 
-  //method to get poses data from firestore
-  Future<List<String>> get_program_Rounds_id()async
+
+  Future<void> get_program_Rounds()async
   {
-    try{
-    final documentSnapshot =
-    await _firestore.collection('program_rounds').get();
-
-
-    if (documentSnapshot.size>=0) {
-
-      return  documentSnapshot.docs.map((doc)=>doc["round_id"].toString()).toList();
-
-      // return poses;
-    }}
-    catch(e)
-    {
-      throw Exception(e.toString());
-    }
-return [];
-  }
-
-  Future<void> get_program_Rounds(List<String> program_rounds_id)async
-  {
-for(int i=0;i<program_rounds_id.length;i++)
-  {
-    try {
-      var documentSnapshot =
-      await _firestore.collection('rounds').doc(program_rounds_id[i]).get();
-
-      program_rounds.add(Round(round_specs:Round_specs.fromSnapshot(documentSnapshot) ));
-    }
+try{      var snaps =
+      await _firestore.collection('rounds').where("focused_area",isEqualTo:true ).get();
+       this.program_focused_area_rounds=snaps.docs.map((doc)=>Round(round_specs:Round_specs.fromSnapshot(doc) )).toList();
+setRoundsImgsUrl(this.program_focused_area_rounds);
+}
     catch(e)
     {
       throw Exception(e.toString());
     }
   }
+
+  void setRoundsImgsUrl(List<Round>? round)//set the downloadUrl for each round image
+  {
+for(int i=0;i<round!.length;i++)
+      {round[i].round_specs.round_img_url= loadImage(round[i].round_specs.round_img_url);}
 
   }
   Future<Round_specs> getRound(String round_id)async
@@ -79,9 +63,7 @@ for(int i=0;i<program_rounds_id.length;i++)
   Future<void> delete_Round(String round_id)async
   {
     try {
-
       await  _firestore.collection('rounds') .doc(round_id).delete();
-
     }
     catch(e)
     {
@@ -89,7 +71,17 @@ for(int i=0;i<program_rounds_id.length;i++)
     }
   }
 
+  static Future<String> loadImage(var img_url1)async {
 
+    try{
+      final String url= await FirebaseStorage.instance.ref("/rounds_imgs").child(img_url1).getDownloadURL();
+      return url;
+    }
+    catch(e){
+      throw Exception(e.toString());
+    }
+
+  }
 
 
 
