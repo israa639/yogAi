@@ -7,6 +7,7 @@ import 'package:yoga_ai/Bloc/login_bloc/login_bloc.dart';
 
 import '../../data/models/pose.dart';
 import '../../data/repositories/poses_repository.dart';
+import '../../data/repositories/rounds_repository.dart';
 
 part 'bottom_nav_bar_event.dart';
 part 'bottom_nav_bar_state.dart';
@@ -15,14 +16,16 @@ class BottomNavBarBloc extends Bloc<BottomNavBarEvent, BottomNavBarState> {
   int current_index=0;
 
 final  poses_repository posesRepository;
+final  roundsRepository round_repository;
 
-
-    BottomNavBarBloc({required this.posesRepository}) : super(PageLoading()) {
+    BottomNavBarBloc({required this.posesRepository,required this.round_repository }) : super(PageLoading()) {
 
     on<AppStarted>((event, emit) async{
 try{
 
   await this.posesRepository.getPoses();
+  await this.round_repository.get_program_Rounds(this.posesRepository.poses);
+
  // this.posesRepository.addPoses();
   //List<Pose>? poses=this.posesRepository.poses;
 

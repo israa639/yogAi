@@ -3,6 +3,7 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:flutter_svg_provider/flutter_svg_provider.dart';
 
 import '../../data/models/Rounds_model.dart';
+import '../screens/poses_screen.dart';
 
 
 class Custom_round_widget extends StatelessWidget {
@@ -18,13 +19,13 @@ class Custom_round_widget extends StatelessWidget {
       onLongPress: () {},
       onTap: () {
 
-        /* Navigator.push(
-            context,
-            MaterialPageRoute(
-                ));*/
+        Navigator.of(context).push(
+            MaterialPageRoute(builder: (_) =>Poses_screen(this.round.round_poses,true)));
+
       },
       child:
       // Expanded(child:
+      Row(children:<Widget> [
       Column(children:<Widget> [
 
         SizedBox(height: 20,),
@@ -32,13 +33,13 @@ class Custom_round_widget extends StatelessWidget {
         children:<Widget> [
 
         Container(
-        height: 200,
+        height: 150,
         width: 300,
         decoration: BoxDecoration(
 
             borderRadius: BorderRadius.all(Radius.circular(20.0)),
 
-            color: Colors.blue.shade100,
+            color: Colors.red.shade50,
             boxShadow: [ BoxShadow(color: Colors.grey, blurRadius: 10.0),]
         ),
       ),
@@ -51,8 +52,8 @@ class Custom_round_widget extends StatelessWidget {
     if(snapshot.connectionState==ConnectionState.done)
     { if (snapshot.hasData) {
     return Container(
-    width: 130,
-    height: 100,
+    width: 160,
+    height: 150,
     child: SvgPicture.network(snapshot.data.toString()),
     );}
 
@@ -79,10 +80,12 @@ class Custom_round_widget extends StatelessWidget {
 
     ],
     ),
-    SizedBox(height: 20,)
-    ,
-    ]
-    )
+
+
+    ])
+        ,SizedBox(width: 20,),
+        ]),
+
     //)
 
     );

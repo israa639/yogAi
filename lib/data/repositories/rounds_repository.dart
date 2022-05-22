@@ -3,6 +3,7 @@ import 'package:firebase_storage/firebase_storage.dart';
 
 import '../models/Round_specs.dart';
 import '../models/Rounds_model.dart';
+import '../models/pose.dart';
 
 class roundsRepository{
 
@@ -10,15 +11,19 @@ class roundsRepository{
   final _firestore=FirebaseFirestore.instance;
   final _fireStorage=FirebaseStorage.instance;
    List<Round>?program_rounds;
-  late final List<Round> program_focused_area_rounds;
+  late final List<dynamic> program_focused_area_rounds;
   List<Round>?program_recommended_flow_rounds;
+
+
+
   var snaps;
-  Future<void> get_program_Rounds()async
+  Future<void> get_program_Rounds(List<Pose>poses)async
   {
 try{      snaps =
-      await _firestore.collection('round').where("focused_area",isEqualTo:true).get();
+      await _firestore.collection('round').where("focused_area",isEqualTo:true ).get();
        this.program_focused_area_rounds=snaps.docs.map((doc)=>Round(round_specs:Round_specs.fromSnapshot(doc) )).toList();
-setRoundsImgsUrl(this.program_focused_area_rounds);
+          setRoundsImgsUrl(this.program_focused_area_rounds);
+          this.program_focused_area_rounds.map((round)=>round.get_round_poses(poses));
 }
     catch(e)
     {
@@ -26,7 +31,7 @@ setRoundsImgsUrl(this.program_focused_area_rounds);
     }
   }
 
-  void setRoundsImgsUrl(List<Round>? round)//set the downloadUrl for each round image
+  void setRoundsImgsUrl(List<dynamic>? round)//set the downloadUrl for each round image
   {
 for(int i=0;i<round!.length;i++)
       {round[i].round_specs.round_storage_url= loadImage(round[i].round_specs.round_img_url);}

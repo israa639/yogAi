@@ -8,7 +8,7 @@ class Pose {
  late final pose_time;
  final String pose_id;
     Future<String>? pose_Storage_url;
-  Pose({required this.pose_name,required this.pose_img_url,this.pose_time,required this.pose_id});
+  Pose({required this.pose_name,required this.pose_img_url,this.pose_time,required this.pose_id,pose_Storage_url});
 //in case of future adding of more poses
   Map<String, dynamic> toDocument() {
 

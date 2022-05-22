@@ -15,6 +15,32 @@ class poses_repository{
       this.poses[i].pose_Storage_url= loadImage(poses[i].pose_img_url);
     }
   }
+  Future<void> getPose_by_id(String pose_id,Pose p)async
+  {
+    final documentSnapshot =
+    await _firestore.collection('poses').doc(pose_id).get();
+
+
+    if (documentSnapshot.exists) {
+
+       p= Pose.fromSnapshot(documentSnapshot);
+
+      p.pose_Storage_url=loadImage(p.pose_img_url);
+
+
+      // return poses;
+    }
+    else{
+      throw Exception('failed load poses');
+    }
+
+
+
+
+
+
+
+  }
   Future<void> getPoses()async
   {
     final documentSnapshot =
