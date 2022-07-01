@@ -14,12 +14,17 @@ class roundsRepository{
   List<Round>?program_recommended_flow_rounds;
 
 
-  Future<void> get_program_Rounds()async
+  Future<void> get_program_Rounds(List<Pose>poses)async
   {
-try{      var snaps =
-      await _firestore.collection('rounds').where("focused_area",isEqualTo:true ).get();
+try{      snaps =
+      await _firestore.collection('round').where("focused_area",isEqualTo:true ).get();
        this.program_focused_area_rounds=snaps.docs.map((doc)=>Round(round_specs:Round_specs.fromSnapshot(doc) )).toList();
-setRoundsImgsUrl(this.program_focused_area_rounds);
+          setRoundsImgsUrl(this.program_focused_area_rounds);
+          for(int i=0;i<this.program_focused_area_rounds.length;i++)
+            {
+              this.program_focused_area_rounds[i].get_round_poses(poses);
+            }
+         // this.program_focused_area_rounds.map((round1)=>round1.get_round_poses(poses));
 }
     catch(e)
     {
