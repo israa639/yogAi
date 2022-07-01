@@ -29,7 +29,7 @@ class user{
    user_name: snap["user_name"],
    level:snap["level"],
    user_id:snap["user_id"],
-   rounds:List<String>.from(snap["my_rounds"]),
+  // rounds:List<String>.from(snap["my_rounds"]),
   );
  }
 
