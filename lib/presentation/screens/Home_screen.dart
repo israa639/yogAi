@@ -95,7 +95,7 @@ class _MyHomeBarState extends State<MyHomeBar> {
                   child: Stack(
                       children: <Widget>[Container(
                         height: 200,
-                        width: 400,
+                        width: 370,
                         decoration: BoxDecoration(
 
                             borderRadius: BorderRadius.all(

@@ -26,6 +26,7 @@ class Custom_round_widget extends StatelessWidget {
       child:
       // Expanded(child:
       Row(children:<Widget> [
+        SizedBox(width:20),
       Column(children:<Widget> [
 
         SizedBox(height: 20,),
@@ -33,7 +34,7 @@ class Custom_round_widget extends StatelessWidget {
         children:<Widget> [
 
         Container(
-        height: 150,
+        height: 170,
         width: 300,
         decoration: BoxDecoration(
 
