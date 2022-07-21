@@ -107,7 +107,7 @@ class _MyHomeBarState extends State<MyHomeBar> {
                             ]
                         ),
                       ), SvgPicture.asset(
-                        "Assets/my_programs.svg",
+                        "assets/my_programs.svg",
                         // color: Colors.redAccent,
                         height: 200,
                         width: 100,

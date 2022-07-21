@@ -1,4 +1,6 @@
 
+import 'dart:async';
+
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -8,6 +10,7 @@ import 'package:yoga_ai/presentation/Custom_widgets/poses_card_widget.dart';
 
 import '../../Bloc/bottom_nav_bar/bottom_nav_bar_bloc.dart';
 import '../DBicons.dart';
+import 'homeView.dart';
 
 class Poses_screen extends StatefulWidget {
 
@@ -38,7 +41,38 @@ _Poses_screenState(this._poses,this.checkBox_appear);
         itemCount: (this._poses.length),
 
         itemBuilder: (contex, index) =>
+<<<<<<< Updated upstream
             Custom_pose_widget(pose:this._poses[index],selectedIndex:_selectedIndex ,checkBox_appear:checkBox_appear,),
+=======
+            Custom_pose_widget(pose:this._poses[index],selectedIndex:_selectedIndex ,),
+
+      ),
+        floatingActionButton:start_button( start_button_appear,_poses, context),
+    );
+  }
+
+  Widget start_button(bool  start_button_appear,List<Pose> poses,BuildContext context) {
+    if (start_button_appear) {
+      return FloatingActionButton(
+        backgroundColor: Colors.redAccent,
+
+        onPressed: () async {
+
+          for(int i=0;i<poses.length;i++)
+          {
+            await
+              Navigator.of(context).push(MaterialPageRoute(builder: (context) => HomeView(poses[i],true)));
+
+          }
+        },
+        tooltip: 'Increment',
+        child: const Icon(Icons.play_arrow,),
+      );
+    }
+    else{
+      return Container();
+    }
+>>>>>>> Stashed changes
 
       )
 

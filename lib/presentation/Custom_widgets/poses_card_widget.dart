@@ -3,7 +3,13 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:flutter_svg_provider/flutter_svg_provider.dart';
 import 'package:yoga_ai/data/models/pose.dart';
 
+<<<<<<< Updated upstream
 class Custom_pose_widget extends StatefulWidget {
+=======
+import '../screens/homeView.dart';
+
+class Custom_pose_widget extends StatelessWidget {
+>>>>>>> Stashed changes
 
   final Pose pose;
   bool checkBox_appear;
@@ -21,7 +27,7 @@ bool checkBox_appear;
   List<String> selectedIndex;
   _Custom_pose_widgetState({required this.pose,required this.selectedIndex,required this.checkBox_appear}) : super();
 
-
+//,s
   @override
   Widget build(BuildContext context)  {
 
@@ -29,11 +35,9 @@ bool checkBox_appear;
         onLongPress: (){
         },
       onTap: () {
-
-       /* Navigator.push(
+        Navigator.push(
             context,
-            MaterialPageRoute(
-                ));*/
+            MaterialPageRoute(builder: (_) =>HomeView(this.pose,false)));
       },
       child:
          // Expanded(child:

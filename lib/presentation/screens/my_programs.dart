@@ -54,7 +54,7 @@ myPrograms_screen({required this.poses});
 
 
                 SvgPicture.asset(
-                  "Assets/yoga_poses.svg",
+                  "assets/yoga_poses.svg",
                   // color: Colors.redAccent,
                   height: 200,
                   width: 100,
