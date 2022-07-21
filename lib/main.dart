@@ -43,9 +43,9 @@ class MyApp extends StatelessWidget {
         providers: [
     BlocProvider<SignupBloc>(create: (context) => SignupBloc(authRepository:RepositoryProvider.of<AuthRepository>(context))),
           BlocProvider<LoginBloc>(create: (context) => LoginBloc(authRepository: RepositoryProvider.of<AuthRepository>(context))),
-          BlocProvider<BottomNavBarBloc>(create: (context) => BottomNavBarBloc(posesRepository: poses_repository())),
+          BlocProvider<BottomNavBarBloc>(create: (context) => BottomNavBarBloc(posesRepository: poses_repository(),round_repository:  RepositoryProvider.of<roundsRepository>(context))),
 
-          BlocProvider<HomeBloc>(create: (context) => HomeBloc(current_user: RepositoryProvider.of<AuthRepository>(context).current_user,round_repository:  RepositoryProvider.of<roundsRepository>(context))),
+          BlocProvider<HomeBloc>(create: (context) => HomeBloc(current_user: RepositoryProvider.of<AuthRepository>(context).current_user,Focused_area_rounds:  RepositoryProvider.of<roundsRepository>(context).program_focused_area_rounds)),
 
 
     ],

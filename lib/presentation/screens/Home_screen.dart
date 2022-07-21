@@ -43,7 +43,7 @@ class _MyHomeBarState extends State<MyHomeBar> {
   @override
   Widget build(BuildContext context) {
     final _HomeBloc = BlocProvider.of<HomeBloc>(context);
-    _HomeBloc.add( FirstInitiate());
+   // _HomeBloc.add( FirstInitiate());
 
     return Scaffold(
         body: BlocBuilder<HomeBloc, HomeState>(
@@ -95,7 +95,7 @@ class _MyHomeBarState extends State<MyHomeBar> {
                   child: Stack(
                       children: <Widget>[Container(
                         height: 200,
-                        width: 400,
+                        width: 370,
                         decoration: BoxDecoration(
 
                             borderRadius: BorderRadius.all(
@@ -137,21 +137,20 @@ class _MyHomeBarState extends State<MyHomeBar> {
             makeTextContainer(
                 Alignment.topLeft, "Focused area", 30, Colors.black),
             SizedBox(height: 10,),
-            makeTextContainer(
-                Alignment.topLeft, "${_HomeBloc.Focused_area_rounds!.length}", 30, Colors.black),
+
             // SizedBox(height: 50,),
-            /*Container(
+            Container(
                 height: 200,
                 child:
                 ListView.builder(
-
+                    scrollDirection: Axis.horizontal,
                     itemCount: (_HomeBloc.Focused_area_rounds!.length),
 
                     itemBuilder: (contex, index) =>
                         Custom_round_widget(
                             _HomeBloc.Focused_area_rounds![index])
                 )
-            ),*/
+            ),
             SizedBox(height: 50,),
             makeTextContainer(
                 Alignment.topLeft, "Recommended Flows", 30, Colors.black),

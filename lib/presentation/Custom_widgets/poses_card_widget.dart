@@ -3,29 +3,15 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:flutter_svg_provider/flutter_svg_provider.dart';
 import 'package:yoga_ai/data/models/pose.dart';
 
-<<<<<<< Updated upstream
-class Custom_pose_widget extends StatefulWidget {
-=======
 import '../screens/homeView.dart';
 
 class Custom_pose_widget extends StatelessWidget {
->>>>>>> Stashed changes
 
-  final Pose pose;
-  bool checkBox_appear;
-  List<String> selectedIndex;
-
-  Custom_pose_widget({required this.pose,required this.selectedIndex,required this.checkBox_appear});
-
-  @override
-  State<Custom_pose_widget> createState() => _Custom_pose_widgetState(pose:pose,selectedIndex: selectedIndex,checkBox_appear:checkBox_appear );
-}
-class _Custom_pose_widgetState extends State<Custom_pose_widget> {
 bool? value=false;
-bool checkBox_appear;
+
   final Pose pose;
   List<String> selectedIndex;
-  _Custom_pose_widgetState({required this.pose,required this.selectedIndex,required this.checkBox_appear}) : super();
+  Custom_pose_widget({required this.pose,required this.selectedIndex}) : super();
 
 //,s
   @override
@@ -106,7 +92,7 @@ bool checkBox_appear;
                 ],
 
               ),
-              checkbox(checkBox_appear),
+              //checkbox(checkBox_appear),
 
             ],
           ),
@@ -115,7 +101,7 @@ bool checkBox_appear;
 
     );
   }
-Widget checkbox(bool value_check)
+/*Widget checkbox(bool value_check)
 {
   if(value_check==true)
     {
@@ -132,5 +118,5 @@ Widget checkbox(bool value_check)
       });
     }
 return Container();
-}
+}*/
 }

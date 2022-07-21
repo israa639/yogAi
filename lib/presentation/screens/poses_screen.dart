@@ -12,22 +12,14 @@ import '../../Bloc/bottom_nav_bar/bottom_nav_bar_bloc.dart';
 import '../DBicons.dart';
 import 'homeView.dart';
 
-class Poses_screen extends StatefulWidget {
 
-final List<Pose>poses;
-bool  checkBox_appear;
 
-Poses_screen(this.poses,this.checkBox_appear);
-
-  @override
-  State<Poses_screen> createState() => _Poses_screenState(poses,checkBox_appear);
-}
-class _Poses_screenState extends State<Poses_screen> {
+class Poses_screen extends StatelessWidget {
 
  final List<Pose> _poses;
-bool  checkBox_appear;
+bool  start_button_appear;
 
-_Poses_screenState(this._poses,this.checkBox_appear);
+Poses_screen(this._poses,this.start_button_appear);
 
   @override
   Widget build(BuildContext context) {
@@ -41,9 +33,6 @@ _Poses_screenState(this._poses,this.checkBox_appear);
         itemCount: (this._poses.length),
 
         itemBuilder: (contex, index) =>
-<<<<<<< Updated upstream
-            Custom_pose_widget(pose:this._poses[index],selectedIndex:_selectedIndex ,checkBox_appear:checkBox_appear,),
-=======
             Custom_pose_widget(pose:this._poses[index],selectedIndex:_selectedIndex ,),
 
       ),
@@ -72,12 +61,17 @@ _Poses_screenState(this._poses,this.checkBox_appear);
     else{
       return Container();
     }
->>>>>>> Stashed changes
 
-      )
 
-    );
   }
+
+
+
+
+
+
+
+
 
 }
 
